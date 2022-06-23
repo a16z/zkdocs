@@ -1,0 +1,50 @@
+{
+    "fields": [
+        {
+            "field_name": "salary",
+            "human_name": "Salary",
+            "description": "Yearly income from employment."
+        },
+        {
+            "field_name": "401k_income",
+            "human_name": "Estimated 401k Income",
+            "description": "Estimated yearly 401k interest accrual."
+        },
+        {
+            "field_name": "bank_account_balance",
+            "human_name": "Checking Account Balance",
+            "description": "Total current value of collateral."
+        },
+        {
+            "field_name": "property_value",
+            "human_name": "Property Value",
+            "description": "Total value of property at issuance."
+        },
+        {
+            "field_name": "loan_value",
+            "human_name": "Initial loan",
+            "description": "Total loan at issuance."
+        }
+    ],
+    "constraints": [
+        {
+            "fieldA": "bank_account_balance",
+            "fieldB": "property_value",
+            "op": "ADD",
+            "constraint": "GT",
+            "fieldCompare": "loan_value"
+        },
+        {
+            "fieldA": "salary",
+            "fieldB": "401k_income",
+            "op": "ADD",
+            "constraint": "GT",
+            "constant": 65000
+        }
+    ],
+    "trusted_institutions": [
+        {
+            "address": "0x1500Df59d0Ea6a053dAEC04044d5EE5240083964"
+        }
+    ]
+}

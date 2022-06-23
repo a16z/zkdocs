@@ -1,0 +1,28 @@
+{
+    "fields": [
+        {
+            "field_name": "field1",
+            "human_name": "Field one",
+            "description": "First field."
+        },
+        {
+            "field_name": "field2",
+            "human_name": "Field two",
+            "description": "Second field."
+        }
+    ],
+    "constraints": [
+        {
+            "fieldA": "field1",
+            "fieldB": "field2",
+            "op": "ADD",
+            "constraint": "LT",
+            "constant": 200000 
+        }
+    ],
+    "trusted_institutions": [
+        {
+            "address": "0x1500Df59d0Ea6a053dAEC04044d5EE5240083964"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "name": "zkdocs-lib",
+    "version": "1.0.0",
+    "author": "sragss",
+    "license": "ISC",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "build": "tsc --build",
+        "test": "mocha -r ts-node/register 'test/**/*.ts'"
+    },
+    "prepare": "npm run build",
+    "files": [
+        "/lib"
+    ],
+    "dependencies": {
+        "@types/chai": "^4.3.1",
+        "@types/mocha": "^9.1.1",
+        "chai": "^4.3.6",
+        "circomlibjs": "^0.1.2",
+        "ethers": "^5.6.9",
+        "mocha": "^10.0.0",
+        "ts-node": "^10.7.0"
+    }
+}
