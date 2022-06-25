@@ -1,0 +1,65 @@
+{
+    "fields": [
+        {
+            "field_name": "account_1",
+            "human_name": "Bank 1 Account",
+            "description": "Account at first bank."
+        },
+        {
+            "field_name": "balance_1",
+            "human_name": "Bank 1 Balance",
+            "description": "Balance at first bank in USD."
+        },
+        {
+            "field_name": "account_2",
+            "human_name": "Bank 2 Account",
+            "description": "Account at second bank."
+        },
+        {
+            "field_name": "balance_2",
+            "human_name": "Bank 2 Balance",
+            "description": "Balance at second bank."
+        },
+        {
+            "field_name": "employee_num_1",
+            "human_name": "Employee ID 1",
+            "description": "Employee number corresponding with first salary."
+        },
+        {
+            "field_name": "salary_1",
+            "human_name": "Job 1 Salary",
+            "description": "Salary of the first job."
+        },
+        {
+            "field_name": "employee_num_2",
+            "human_name": "Employee ID 2",
+            "description": "Employee number corresponding with second salary."
+        },
+        {
+            "field_name": "salary_2",
+            "human_name": "Job 2 Salary",
+            "description": "Salary of the second job."
+        }
+    ],
+    "constraints": [
+        {
+            "fieldA": "account_1",
+            "fieldB": "account_2",
+            "op": "ADD",
+            "constraint": "LT",
+            "constant": 200000 
+        },
+        {
+            "fieldA": "salary_1",
+            "fieldB": "salary_2",
+            "op": "ADD",
+            "constraint": "LT",
+            "constant": 120000 
+        }
+    ],
+    "trusted_institutions": [
+        {
+            "address": "0x1ad91ee08f21be3de0ba2ba6918e714da6b45836"
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+{
+    "fields": [
+        {
+            "field_name": "investment_account_number",
+            "human_name": "Investment Account Number",
+            "description": "Account number at investment institution.",
+            "string": true
+        },
+        {
+            "field_name": "investment_account_profits",
+            "human_name": "Investment Account Profits",
+            "description": "Total investment account profits last year."
+        },
+        {
+            "field_name": "employee_id",
+            "human_name": "Employee ID",
+            "description": "Employee ID number. Used for employer to verify salary info.",
+            "string": true
+        },
+        {
+            "field_name": "salary",
+            "human_name": "Salary",
+            "description": "Last year total salary."
+        }
+    ],
+    "constraints": [
+        {
+            "fieldA": "investment_account_profits",
+            "fieldB": "salary",
+            "op": "ADD",
+            "constraint": "GT",
+            "constant": 100000 
+        },
+        {
+            "fieldA": "investment_account_profits",
+            "fieldB": "salary",
+            "op": "ADD",
+            "constraint": "LT",
+            "constant": 200000 
+        }
+    ],
+    "trusted_institutions": [
+        {
+            "address": "0x1500Df59d0Ea6a053dAEC04044d5EE5240083964",
+            "human_name": "Charles Schwab"
+        },
+        {
+            "address": "0x15004E1114C1C090D06EaE7dC6a5ee233a621Fa2",
+            "human_name": "University of Chicago LLC"
+        },
+        {
+            "address": "0x35f30531Da281384831481499861900966e782Cc",
+            "human_name": "JP Morgan"
+        },
+        {
+            "address": "0x699fC82ab59C3b278d07538A05D2F0053f38B2B4",
+            "human_name": "Internal Revenue Service"
+        },
+        {
+            "address": "0x8401C74DB59F67fe7A9A07910C8118807a6F9c07",
+            "human_name": "SEC"
+        }
+    ]
+}

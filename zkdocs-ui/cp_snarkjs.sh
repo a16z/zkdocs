@@ -1,0 +1,1 @@
+cp ../node_modules/snarkjs/build/snarkjs.min.js ./public/snarkjs.min.js

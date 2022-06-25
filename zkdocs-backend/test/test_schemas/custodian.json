@@ -1,0 +1,39 @@
+{
+    "fields": [
+        {
+            "field_name": "custodian_name",
+            "human_name": "Custodian name",
+            "description": "Birth name of custodian.",
+            "string": true
+        },
+        {
+            "field_name": "total_loan",
+            "human_name": "Initial loan",
+            "description": "Total loan value at issuance."
+        },
+        {
+            "field_name": "total_collateral_value",
+            "human_name": "Collateral value",
+            "description": "Total current value of collateral."
+        },
+        {
+            "field_name": "amount_repayed",
+            "human_name": "Amount repayed",
+            "description": "Total current value of collateral."
+        }
+    ],
+    "constraints": [
+        {
+            "fieldA": "total_loan",
+            "fieldB": "amount_repayed",
+            "op": "SUB",
+            "constraint": "LT",
+            "fieldCompare": "total_collateral_value"
+        }
+    ],
+    "trusted_institutions": [
+        {
+            "address": "0x1500Df59d0Ea6a053dAEC04044d5EE5240083964"
+        }
+    ]
+}
