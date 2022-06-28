@@ -62,7 +62,7 @@ Any third party verifier can view the state of the document submission process f
 
 
 ## Commands
-- Clone: `gh repo clone a16z/zk-documents-mono`
+- Clone: `gh repo clone a16z/zkdocs`
 - Install: `yarn install`
 - Check `./zkdocs-ui` + `./zkdocs-backend` for workspace specific commands.
 
