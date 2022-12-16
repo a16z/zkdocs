@@ -127,7 +127,7 @@ export default function SubmitterForm() {
     if (schema && inputFields) {
         return (
             <div className="p-5 rounded-md shadow-md">
-                <div className="grid grid-cols-3 text-center font-medium">
+                <div className="grid grid-cols-3 font-medium text-center">
                     <div>Field</div>
                     <div>Input</div>
                     <div>Attester</div>
@@ -138,7 +138,7 @@ export default function SubmitterForm() {
                     return (
                         <div
                             key={index}
-                            className="grid grid-cols-3 border-t p-3"
+                            className="grid grid-cols-3 p-3 border-t"
                         >
                             <div>
                                 <label className="block text-sm font-medium text-gray-800">
@@ -148,11 +148,11 @@ export default function SubmitterForm() {
                                     {field.description}
                                 </label>
                             </div>
-                            <div className="flex rounded-md ml-4 mr-4">
+                            <div className="flex ml-4 mr-4 rounded-md">
                                 <input
                                     type="text"
                                     name={"input_" + field.field_name}
-                                    className="block rounded-md w-full border-gray-300 text-sm"
+                                    className="block w-full text-sm border-gray-300 rounded-md"
                                     value={inputFields![index]}
                                     onChange={(evt) =>
                                         setField(index, evt.target.value)
@@ -162,7 +162,7 @@ export default function SubmitterForm() {
                             <div className="ml-4 mr-4">
                                 <select
                                     name="institution"
-                                    className="block w-full border-gray-300 bg-white rounded-md shadow-sm"
+                                    className="block w-full bg-white border-gray-300 rounded-md shadow-sm"
                                     onChange={(evt) =>
                                         updateAttester(index, evt.target.value)
                                     }
@@ -186,7 +186,7 @@ export default function SubmitterForm() {
                 })}
 
                 {/* CONSTRAINTS */}
-                <div className="bg-white shadow overflow-hidden rounded-lg mt-2">
+                <div className="mt-2 overflow-hidden bg-white rounded-lg shadow">
                     <div className="p-4">
                         <h3 className="text-lg">Constraints</h3>
                         <p className="text-sm text-gray-500">
@@ -194,7 +194,7 @@ export default function SubmitterForm() {
                             met.
                         </p>
                     </div>
-                    <div className="border-t border-gray-200 p-4 pt-0">
+                    <div className="p-4 pt-0 border-t border-gray-200">
                         {schema!.json.constraints.map((constraint, index) => {
                             return (
                                 <ConstraintDisplay
@@ -209,7 +209,7 @@ export default function SubmitterForm() {
                 </div>
 
                 {/* PROOF */}
-                <div className="shadow overflow-hidden rounded-lg mt-4">
+                <div className="mt-4 overflow-hidden rounded-lg shadow">
                     <div
                         className="grid grid-cols-2 bg-green-100 hover:bg-green-300 active:bg-green-400"
                         onClick={startCalculateProof}
@@ -221,23 +221,23 @@ export default function SubmitterForm() {
                                 some time...
                             </p>
                         </div>
-                        <div className="flex justify-end items-center mr-8 animate-pulse text-md">
+                        <div className="flex items-center justify-end mr-8 animate-pulse text-md">
                             {proofInProgress ? "Calculating..." : ""}
                         </div>
                     </div>
                     {proof !== "" ? (
-                        <div className="bg-white font-mono border-t w-100 p-4 text-ellipsis">
-                            <div className="m-1 flex rounded-md">
+                        <div className="p-4 font-mono bg-white border-t w-100 text-ellipsis">
+                            <div className="flex m-1 rounded-md">
                                 <input
                                     type="text"
                                     name="proof"
                                     id="proof"
-                                    className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md border-gray-300"
+                                    className="flex-1 block w-full min-w-0 px-3 py-2 border-gray-300 rounded-none rounded-l-md"
                                     placeholder={proof}
                                     readOnly={true}
                                 />
                                 <button
-                                    className="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 hover:bg-gray-400 active:bg-gray-500"
+                                    className="inline-flex items-center px-3 text-gray-500 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 hover:bg-gray-400 active:bg-gray-500"
                                     onClick={() =>
                                         navigator.clipboard.writeText(proof)
                                     }
@@ -257,7 +257,7 @@ export default function SubmitterForm() {
                 attesters &&
                 accountData &&
                 accountData!.address ? (
-                    <div className="shadow overflow-hidden rounded-lg mt-4 bg-white">
+                    <div className="mt-4 overflow-hidden bg-white rounded-lg shadow">
                         <div className="p-4">
                             <h3 className="text-lg">Attestation links</h3>
                             <p className="text-sm text-gray-500">
@@ -280,7 +280,7 @@ export default function SubmitterForm() {
                 {/* SUBMIT */}
                 {inputFields && nonces && commits && attesters && accountData ? (
                     <div
-                        className="shadow rounded-lg mt-4 bg-green-100 hover:bg-green-300 active:bg-green-400"
+                        className="mt-4 bg-green-100 rounded-lg shadow hover:bg-green-300 active:bg-green-400"
                         onClick={() =>
                             submit(commits!, attesters!, contractWrite)
                         }
@@ -298,7 +298,7 @@ export default function SubmitterForm() {
 
                 {/* ERROR */}
                 {error ? (
-                    <div className="mt-5 p-4 bg-red-300 rounded-md">
+                    <div className="p-4 mt-5 bg-red-300 rounded-md">
                         {" "}
                         {"Error: " + error.toString()}{" "}
                     </div>

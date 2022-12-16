@@ -110,8 +110,8 @@
       ]
     },
     "/Users/SRagsdale/Documents/code/a16z/zkdocs/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1671213780978,
-      "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
+      "lastModificationDate": 1671215119586,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
         "version": "0.8.8",

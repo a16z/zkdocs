@@ -28,7 +28,7 @@
     "hardhat": "^2.6.6",
     "hardhat-gas-reporter": "^1.0.4",
     "mocha": "^9.2.2",
-    "snarkjs": "0.4.19",
+    "snarkjs": "0.5.0",
     "ts-mocha": "^8.0.0",
     "ts-node": "^10.4.0",
     "typechain": "^8.0.0",
