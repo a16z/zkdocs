@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/zkdocs-backend/contracts/compiled/PlonkVerifier.sol": {
-      "lastModificationDate": 1655828043062,
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/zkdocs-backend/contracts/compiled/PlonkVerifier.sol": {
+      "lastModificationDate": 1671214283070,
       "contentHash": "b868819ecf81a3ddac942e0e3ac4c94b",
       "sourceName": "contracts/compiled/PlonkVerifier.sol",
       "solcConfig": {
@@ -36,8 +36,43 @@
         "PlonkVerifier"
       ]
     },
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/zkdocs-backend/contracts/ZkDocument.sol": {
-      "lastModificationDate": 1655839359888,
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/zkdocs-backend/contracts/IPlonkVerifier.sol": {
+      "lastModificationDate": 1671213731617,
+      "contentHash": "97fffedd4dc619ccb48fb10dd0945d49",
+      "sourceName": "contracts/IPlonkVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.8",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "IPlonkVerifier"
+      ]
+    },
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/zkdocs-backend/contracts/ZkDocument.sol": {
+      "lastModificationDate": 1671213731617,
       "contentHash": "462b036057a8fad47aac40deeff5540c",
       "sourceName": "contracts/ZkDocument.sol",
       "solcConfig": {
@@ -74,8 +109,8 @@
         "ZKDocument"
       ]
     },
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1655828180359,
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1671213780978,
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -111,8 +146,8 @@
         "Ownable"
       ]
     },
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1655828180373,
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1671213780983,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -146,8 +181,8 @@
         "Context"
       ]
     },
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/zkdocs-backend/contracts/test/FakeVerifier.sol": {
-      "lastModificationDate": 1654797593417,
+    "/Users/SRagsdale/Documents/code/a16z/zkdocs/zkdocs-backend/contracts/test/FakeVerifier.sol": {
+      "lastModificationDate": 1671213731617,
       "contentHash": "fae3538761f6996049a3e87e09af9385",
       "sourceName": "contracts/test/FakeVerifier.sol",
       "solcConfig": {
@@ -179,41 +214,6 @@
       ],
       "artifacts": [
         "FakeVerifier"
-      ]
-    },
-    "/Users/sragsdale/Documents/Code/zk-documents-mono/zkdocs-backend/contracts/IPlonkVerifier.sol": {
-      "lastModificationDate": 1655839359888,
-      "contentHash": "97fffedd4dc619ccb48fb10dd0945d49",
-      "sourceName": "contracts/IPlonkVerifier.sol",
-      "solcConfig": {
-        "version": "0.8.8",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.8"
-      ],
-      "artifacts": [
-        "IPlonkVerifier"
       ]
     }
   }

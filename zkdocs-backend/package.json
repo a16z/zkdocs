@@ -4,6 +4,7 @@
   "description": "ZkDocs backend repo. Contains contracts, circuit compilation and test.",
   "private": true,
   "scripts": {
+    "start": "yarn hardhat node",
     "test-generator": "mocha -r ts-node/register 'test/generator.spec.ts'"
   },
   "dependencies": {

@@ -1,4 +1,14 @@
 {
   "private": true,
-  "workspaces": ["zkdocs-backend", "zkdocs-ui", "zkdocs-lib"]
+  "workspaces": [
+    "zkdocs-backend", 
+    "zkdocs-ui", 
+    "zkdocs-lib"
+  ],
+  "scripts": {
+    "start-local-backend": "cd zkdocs-backend && yarn start",
+    "run-demo": "cd zkdocs-backend && yarn hardhat build-deploy-schema --schema ./test/test_schemas/tax_bracket.json --network localhost && cd .. && ./cp_script.sh tax_bracket ./zkdocs-backend/test/test_schemas/tax_bracket.json",
+    "start-local-client": "cd zkdocs-ui && yarn start",
+    "postinstall": "cp ./node_modules/snarkjs/build/snarkjs.min.js ./zkdocs-ui/public"
+  }
 }

@@ -66,18 +66,18 @@ Any third party verifier can view the state of the document submission process f
 - Install: `yarn install`
 - Check `./zkdocs-ui` + `./zkdocs-backend` for workspace specific commands.
 
+
 ## Local Demo
-(All from repo root)
+### Prereqs
+- [Install Circom, SnarkJS](https://docs.circom.io/getting-started/installation/#installing-dependencies)
+
+### Cmds
 - `yarn install`
-- `cd zkdocs-backend && yarn hardhat node` -- start HH testnet
-- (New window) 
-- `cd zkdocs-backend` 
-- `yarn hardhat build-deploy-schema --schema ./test/test_schemas/tax_bracket.json --network localhost` -- compile schema, deploy to local HH testnet
-- (Note the zkDoc contract address)
-- `cd ..` 
-- `./cp_script.sh tax_bracket ./zkdocs-backend/test/test_schemas/tax_bracket.json` -- copy schema artifacts to UI
-- `cd zkdocs-ui` 
-- `yarn run start`
+- `yarn start-local-backend`
+- `yarn run-demo`
+- `yarn start-local-client`
+- Navigate to `localhost:3000`, switch wallet to Harhdat testnet (`localhost:8545`)
+- Enter zkDoc contract address (should be `0xe7f1725e7734ce288f8367e1bb143e90bb3f0512`)
 
 ## Disclaimer
 _These smart contracts are being provided as is. No guarantee, representation or warranty is being made, express or implied, as to the safety or correctness of the user interface or the smart contracts. They have not been audited and as such there can be no assurance they will work as intended, and users may experience delays, failures, errors, omissions or loss of transmitted information. In addition, any airdrop using these smart contracts should be conducted in accordance with applicable law. Nothing in this repo should be construed as investment advice or legal advice for any particular facts or circumstances and is not meant to replace competent counsel. It is strongly advised for you to contact a reputable attorney in your jurisdiction for any questions or concerns with respect thereto.  a16z is not liable for any use of the foregoing and users should proceed with caution and use at their own risk. See a16z.com/disclosure for more info._
