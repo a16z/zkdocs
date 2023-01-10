@@ -59,7 +59,7 @@ export default function AttestationPage() {
         let hash = await contract.schemaHash();
         let schemaMeta = await findSchemaForHash(hash);
         if (schemaMeta === undefined) {
-            setError(`Failed to find matching local schmea for hash: ${hash}`);
+            setError(`Failed to find matching local schema for hash: ${hash}`);
             return;
         }
         let schema = ZkDocSchema.parseFromString(

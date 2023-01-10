@@ -18,7 +18,7 @@ contract ZKDocument is Ownable {
     IPlonkVerifier verifier;
 
     mapping(address => bool) public trustedInstitutions; // Set of valid trusted institutions (admin updated)
-    mapping(bytes32 => bytes32) public fieldCommitments; // Map field_index => commitment (submittor updated)
+    mapping(bytes32 => bytes32) public fieldCommitments; // Map field_index => commitment (submitter updated)
     mapping(bytes32 => address) public requiredCommitmentAttestations; // Map field_index => attestor addr (user updated)
     mapping(bytes32 => bool) public attestations; // Set of field_indexes that have been attested to (valid attestor updated) -- CANNOT use commitments because of collision
     address[] public validatedSubmitters; // Submitter addresses who have successful passed validation of this contract
@@ -58,7 +58,7 @@ contract ZKDocument is Ownable {
     }
 
     /**
-     * @notice Add multiple insitutions to set of trusted institutions.
+     * @notice Add multiple institutions to set of trusted institutions.
      *
      * @param institutions array of addresses to add.
      */
@@ -119,7 +119,7 @@ contract ZKDocument is Ownable {
     }
 
     /**
-     * @notice Called by a submitter who has already posted commitments and recieved attestations
+     * @notice Called by a submitter who has already posted commitments and received attestations
      *         to verify the zero-knowledge proof and attestations.
      *
      * @param proof Circom proof byte string.

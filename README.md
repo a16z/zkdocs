@@ -32,7 +32,7 @@ From the schema the library transpiles a zero-knowledge circuit. Now the verifie
 
 Submitters can then connect a client (like `./zkdocs-ui`) and submit some *commitments* to the fields. These commitments are computed as `hash(value, nonce)` for each field in the schema. Commitments are a cryptographic scheme with two important properties:
 - One way: probabalistically near impossible to reverse the value from the commitment to the value
-- Collision resistant: probabalistically near impossible that a submitter can post a commitment and later find another `(value, nonce)` combination hashing to the same commitment
+- Collision resistant: probabilistically near impossible that a submitter can post a commitment and later find another `(value, nonce)` combination hashing to the same commitment
 
 As a result, a submitter cannot change their inputs after broadcasting the commitment, but has also not revealed any information about their underlying values.
 

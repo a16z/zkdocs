@@ -8,8 +8,8 @@ let FAUCET_AMOUNT = BigNumber.from(1).mul(
 
 export async function SendHardhatFunds(
     provider: ethers.providers.BaseProvider,
-    reciever: string
+    receiver: string
 ) {
     let wallet = new ethers.Wallet(HH_PK, provider);
-    await wallet.sendTransaction({ to: reciever, value: FAUCET_AMOUNT });
+    await wallet.sendTransaction({ to: receiver, value: FAUCET_AMOUNT });
 }
