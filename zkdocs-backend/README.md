@@ -124,7 +124,7 @@ The Generator (`./generator/ZkDocGenerator.ts`) is a schema -> circom circuit co
 The contract itself stores the Keccak256 hash of the flattened schema file. The sample UI `./zkdocs-ui` uses this to lookup the schema against the contract, but the goal is to hinder a client-side / supply chain attack against the UI.
 
 ## String Fields
-Each schema field has an optional `string` proprety. These fields are ASCII encoded to BigInts. If non-ascii characters are provided they will be encoded as "00". Currently these are capped at 31 ASCII characters long.
+Each schema field has an optional `string` property. These fields are ASCII encoded to BigInts. If non-ascii characters are provided they will be encoded as "00". Currently these are capped at 31 ASCII characters long.
 
 ## Constraints
 Currently the constraint specification system is limited. For now it allows the following types of constraints:
@@ -143,7 +143,7 @@ Both simpler and more complex LHS and RHS statements are easy to implement but c
 ## Future Work
 - [ ] Improved constraint system for transpiler
 - [ ] More granular permissions on trustedInstitutions
-- [ ] Use a mixer on trustedInstitutions to obsfuscate
+- [ ] Use a mixer on trustedInstitutions to obfuscate
 - [ ] Fully off-chain version proof / broadcasting system
 - [ ] Contracts can be made significantly more gas efficient with slightly different assumptions (ex: one submitter, one institution, specific institution per field, etc)
 - [ ] Longer string field types
