@@ -76,7 +76,7 @@ Any third party verifier can view the state of the document submission process f
 - `yarn start-local-backend`
 - `yarn run-demo`
 - `yarn start-local-client`
-- Navigate to `localhost:3000`, switch wallet to Harhdat testnet (`localhost:8545`)
+- Navigate to `localhost:3000`, switch wallet to Hardhat testnet (`localhost:8545`)
 - Enter zkDoc contract address (should be `0xe7f1725e7734ce288f8367e1bb143e90bb3f0512`)
 
 ## Disclaimer
