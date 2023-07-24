@@ -1,8 +1,8 @@
-import {CircuitTemplate} from "./CircuitTemplate";
-import {ZkDocSchema} from "zkdocs-lib";
+import { CircuitTemplate } from "./CircuitTemplate";
+import { ZkDocSchema } from "zkdocs-lib";
 
-import {existsSync, mkdirSync, writeFileSync} from "fs";
-import {exit} from "process";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { exit } from "process";
 import path from "path";
 
 const util = require('util');
@@ -26,7 +26,7 @@ export class ZkDocGenerator {
         public circuitName: string = "circuit",
         public importPathPrefix: string = "") {
 
-        if (!existsSync(rootBuildPath)){
+        if (!existsSync(rootBuildPath)) {
             mkdirSync(rootBuildPath);
         }
     }
@@ -48,7 +48,7 @@ export class ZkDocGenerator {
         writeFileSync(circuitPath, circuitString);
 
         // Build circuit
-        const buildCmd = `circom "${circuitPath}" --sym --wasm --r1cs -o "${this.rootBuildPath}"`;
+        const buildCmd = `circom "${ circuitPath }" --sym --wasm --r1cs -o "${ this.rootBuildPath }"`;
         let { stdout, stderr } = await exec(buildCmd);
         if (stdout != "") {
             console.log("Circom build: \n", stdout);
@@ -59,9 +59,9 @@ export class ZkDocGenerator {
     }
 
     public async genZkey() {
-        const circuitPath = path.join(this.rootBuildPath, `${this.circuitName}.r1cs`);
-        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
-        const genCmd = `snarkjs plonk setup "${ circuitPath }" "${this.potFilePath}" "${ zkeyPath }"`;
+        const circuitPath = path.join(this.rootBuildPath, `${ this.circuitName }.r1cs`);
+        const zkeyPath = path.join(this.rootBuildPath, `${ this.circuitName }_final.zkey`);
+        const genCmd = `snarkjs plonk setup "${ circuitPath }" "${ this.potFilePath }" "${ zkeyPath }"`;
         const { stdout, stderr } = await exec(genCmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
@@ -75,8 +75,8 @@ export class ZkDocGenerator {
         if (destination === undefined) {
             destination = path.join(__dirname, "..", "contracts", "compiled")
         }
-        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
-        const cmd = `snarkjs zkey export solidityverifier "${ zkeyPath }" "${destination}/${fileName}.sol"`
+        const zkeyPath = path.join(this.rootBuildPath, `${ this.circuitName }_final.zkey`);
+        const cmd = `snarkjs zkey export solidityverifier "${ zkeyPath }" "${ destination }/${ fileName }.sol"`
         let { stdout, stderr } = await exec(cmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
@@ -87,8 +87,8 @@ export class ZkDocGenerator {
     }
 
     public async exportVkey() {
-        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
-        const cmd = `snarkjs zkey export verificationkey "${ zkeyPath }" "${this.rootBuildPath}/verification_key.json"`
+        const zkeyPath = path.join(this.rootBuildPath, `${ this.circuitName }_final.zkey`);
+        const cmd = `snarkjs zkey export verificationkey "${ zkeyPath }" "${ this.rootBuildPath }/verification_key.json"`
         const { stdout, stderr } = await exec(cmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
@@ -103,21 +103,21 @@ export class ZkDocGenerator {
         let constIndex = 0;
 
         return this.schema.json.constraints.map((constraint, index) => {
-            let constraintVarName = `constraint${index}`
-            let constraintStr = `var ${constraintVarName} = `;
+            let constraintVarName = `constraint${ index }`
+            let constraintStr = `var ${ constraintVarName } = `;
             if (constraint.op == "ADD") {
-                constraintStr += `values[${this.lookupFieldIndex(constraint.fieldA)}] + values[${this.lookupFieldIndex(constraint.fieldB)}];\n`
+                constraintStr += `values[${ this.lookupFieldIndex(constraint.fieldA) }] + values[${ this.lookupFieldIndex(constraint.fieldB) }];\n`
             } else if (constraint.op == "SUB") {
-                constraintStr += `values[${this.lookupFieldIndex(constraint.fieldA)}] - values[${this.lookupFieldIndex(constraint.fieldB)}];\n`
+                constraintStr += `values[${ this.lookupFieldIndex(constraint.fieldA) }] - values[${ this.lookupFieldIndex(constraint.fieldB) }];\n`
             } else if (constraint.op == "NONE") {
-                constraintStr += `values[${this.lookupFieldIndex(constraint.fieldA)}];\n`
+                constraintStr += `values[${ this.lookupFieldIndex(constraint.fieldA) }];\n`
             } else {
                 console.error("Cannot generate constraint from OP ", constraint);
                 exit(-1);
             }
 
-            let componentName = `comp${index}`
-            constraintStr += `component ${componentName} = `
+            let componentName = `comp${ index }`
+            constraintStr += `component ${ componentName } = `
             if (constraint.constraint == "GT") {
                 constraintStr += "GreaterEqThan(32);\n";
             } else if (constraint.constraint == "LT") {
@@ -127,19 +127,19 @@ export class ZkDocGenerator {
                 exit(-1);
             }
 
-            constraintStr += `${componentName}.in[0] <== ${constraintVarName};\n`
-            constraintStr += `${componentName}.in[1] <== `
+            constraintStr += `${ componentName }.in[0] <== ${ constraintVarName };\n`
+            constraintStr += `${ componentName }.in[1] <== `
 
             if (constraint.constant) {
-                constraintStr += `consts[${constIndex}];\n`;
+                constraintStr += `consts[${ constIndex }];\n`;
                 constIndex += 1;
             } else if (constraint.fieldCompare) {
-                constraintStr += `values[${this.lookupFieldIndex(constraint.fieldCompare!)}];\n`
+                constraintStr += `values[${ this.lookupFieldIndex(constraint.fieldCompare!) }];\n`
             } else {
                 console.error("Constraint didn't have constant nor fieldCompare.") // Shouldn't happen
             }
 
-            constraintStr += `${componentName}.out === 1;\n\n`;
+            constraintStr += `${ componentName }.out === 1;\n\n`;
             return constraintStr;
         }).reduce((full, next) => full + next);
     }
@@ -147,7 +147,7 @@ export class ZkDocGenerator {
     private lookupFieldIndex(fieldName: string): number {
         let index = this.schema.json.fields.findIndex(field => field.field_name == fieldName);
         if (index == -1) {
-            console.error(`Failed to lookup field ${fieldName} in schema.`);
+            console.error(`Failed to lookup field ${ fieldName } in schema.`);
             exit(-1);
         }
         return index;
