@@ -1,8 +1,8 @@
-import { CircuitTemplate } from "./CircuitTemplate";
-import { ZkDocSchema } from "zkdocs-lib";
+import {CircuitTemplate} from "./CircuitTemplate";
+import {ZkDocSchema} from "zkdocs-lib";
 
-import { existsSync, mkdirSync, writeFileSync } from "fs";
-import { exit } from "process";
+import {existsSync, mkdirSync, writeFileSync} from "fs";
+import {exit} from "process";
 import path from "path";
 
 const util = require('util');
@@ -11,17 +11,17 @@ const exec = util.promisify(require('child_process').exec);
 
 /**
  * Util: wraps  ZkDocSchema, helps generate the circuit and corresponding build files.
- *         __    ________                        
+ *         __    ________
  * _______|  | __\______ \   ____   ____   ______
  * \___   /  |/ / |    |  \ /  _ \_/ ___\ /  ___/
- *  /    /|    <  |    `   (  <_> )  \___ \___ \ 
+ *  /    /|    <  |    `   (  <_> )  \___ \___ \
  * /_____ \__|_ \/_______  /\____/ \___  >____  >
- *       \/    \/        \/            \/     \/ 
+ *       \/    \/        \/            \/     \/
  */
 export class ZkDocGenerator {
     public constructor(
-        public schema: ZkDocSchema, 
-        public rootBuildPath: string, 
+        public schema: ZkDocSchema,
+        public rootBuildPath: string,
         public potFilePath: string,
         public circuitName: string = "circuit",
         public importPathPrefix: string = "") {
@@ -38,17 +38,17 @@ export class ZkDocGenerator {
 
     public async buildCircuit() {
         // Write circuit
-        let circuitPath = `${this.rootBuildPath}/${this.circuitName}.circom`;
-        let constraintStr = this.generateConstraintString();
-        let circuitString = CircuitTemplate(
-            this.schema.json.fields.length, 
-            this.schema.json.constraints.filter(constraint => constraint.constant).length, 
+        const circuitPath = path.join(this.rootBuildPath, `${ this.circuitName }.circom`);
+        const constraintStr = this.generateConstraintString();
+        const circuitString = CircuitTemplate(
+            this.schema.json.fields.length,
+            this.schema.json.constraints.filter(constraint => constraint.constant).length,
             constraintStr,
             this.importPathPrefix);
         writeFileSync(circuitPath, circuitString);
 
         // Build circuit
-        let buildCmd = `circom ${circuitPath} --sym --wasm --r1cs -o ${this.rootBuildPath}`;
+        const buildCmd = `circom "${circuitPath}" --sym --wasm --r1cs -o "${this.rootBuildPath}"`;
         let { stdout, stderr } = await exec(buildCmd);
         if (stdout != "") {
             console.log("Circom build: \n", stdout);
@@ -59,8 +59,10 @@ export class ZkDocGenerator {
     }
 
     public async genZkey() {
-        let genCmd = `snarkjs plonk setup ${this.rootBuildPath}/${this.circuitName}.r1cs ${this.potFilePath} ${this.rootBuildPath}/${this.circuitName}_final.zkey`;
-        let { stdout, stderr } = await exec(genCmd);
+        const circuitPath = path.join(this.rootBuildPath, `${this.circuitName}.r1cs`);
+        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
+        const genCmd = `snarkjs plonk setup "${ circuitPath }" "${this.potFilePath}" "${ zkeyPath }"`;
+        const { stdout, stderr } = await exec(genCmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
         }
@@ -73,7 +75,8 @@ export class ZkDocGenerator {
         if (destination === undefined) {
             destination = path.join(__dirname, "..", "contracts", "compiled")
         }
-        let cmd = `snarkjs zkey export solidityverifier ${this.rootBuildPath}/${this.circuitName}_final.zkey ${destination}/${fileName}.sol`
+        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
+        const cmd = `snarkjs zkey export solidityverifier "${ zkeyPath }" "${destination}/${fileName}.sol"`
         let { stdout, stderr } = await exec(cmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
@@ -84,11 +87,13 @@ export class ZkDocGenerator {
     }
 
     public async exportVkey() {
-        let cmd = `snarkjs zkey export verificationkey ${this.rootBuildPath}/${this.circuitName}_final.zkey ${this.rootBuildPath}/verification_key.json`
-        let { stdout, stderr } = await exec(cmd);
+        const zkeyPath = path.join(this.rootBuildPath, `${this.circuitName}_final.zkey`);
+        const cmd = `snarkjs zkey export verificationkey "${ zkeyPath }" "${this.rootBuildPath}/verification_key.json"`
+        const { stdout, stderr } = await exec(cmd);
         if (stdout != "") {
             console.log("snarkjs gen zkey: \n", stdout);
         }
+
         if (stderr != "") {
             console.error("snarkjs gen zkey build failed: \n", stderr);
         }
@@ -96,7 +101,8 @@ export class ZkDocGenerator {
 
     private generateConstraintString(): string {
         let constIndex = 0;
-        let constraints = this.schema.json.constraints.map((constraint, index) => {
+
+        return this.schema.json.constraints.map((constraint, index) => {
             let constraintVarName = `constraint${index}`
             let constraintStr = `var ${constraintVarName} = `;
             if (constraint.op == "ADD") {
@@ -123,7 +129,7 @@ export class ZkDocGenerator {
 
             constraintStr += `${componentName}.in[0] <== ${constraintVarName};\n`
             constraintStr += `${componentName}.in[1] <== `
-            
+
             if (constraint.constant) {
                 constraintStr += `consts[${constIndex}];\n`;
                 constIndex += 1;
@@ -135,11 +141,7 @@ export class ZkDocGenerator {
 
             constraintStr += `${componentName}.out === 1;\n\n`;
             return constraintStr;
-        }).reduce((full, next) => {
-            return full += next;
-        })
-
-        return constraints 
+        }).reduce((full, next) => full + next);
     }
 
     private lookupFieldIndex(fieldName: string): number {
