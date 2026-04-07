@@ -5,7 +5,7 @@ import { ZkDocGenerator } from "../generator/ZkDocGenerator";
 import { keccakJson } from "zkdocs-lib";
 
 const POT_PATH = path.join(__dirname, "..", "build", "pot16_final.ptau");
-const CACHE_DIR = path.join(__dirname, "..", "circuit_cache")
+const CACHE_DIR = path.join(__dirname, "..", "circuit_cache");
 
 export async function buildAndDeploySchema(args: any, hre: any) {
     await build(args.schema)
